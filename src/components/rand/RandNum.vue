@@ -4,29 +4,26 @@ import Card from '@/ui/cards/Card.vue'
 import CardBody from '@/ui/cards/CardBody.vue'
 import CardFooter from '@/ui/cards/CardFooter.vue'
 import CardHeader from '@/ui/cards/CardHeader.vue'
+import Input from '@/ui/inputs/Input.vue'
 import Switch from '@/ui/inputs/Switch.vue'
 import { computed, ref } from 'vue'
 
-const value = ref('')
-const upper = ref(false)
-const unseparated = ref(false)
+const value = ref(Math.random())
+const rate = ref(1);
+const rounding = ref(false)
 
 const text = computed(() => {
-  let res = value.value
+  let res = value.value * rate.value
 
-  if (upper.value) {
-    res = res.toUpperCase()
-  }
-
-  if (unseparated.value) {
-    res = res.replace(/-/g, '')
+  if (rounding.value) {
+    res = Math.floor(res)
   }
 
   return res
 })
 
 function generate() {
-  value.value = crypto.randomUUID()
+  value.value = Math.random()
 }
 
 generate()
@@ -34,16 +31,14 @@ generate()
 
 <template>
   <Card>
-    <CardHeader>Random UUID</CardHeader>
+    <CardHeader>Random Number</CardHeader>
     <CardBody>
       <div>{{ text }}</div>
+      <div>Magnification:</div>
+      <div><Input type="number" v-model.number="rate" /></div>
       <div>
-        <Switch v-model="upper" />
-        {{ upper ? 'Upper Case': 'Lower Case' }}
-      </div>
-      <div>
-        <Switch v-model="unseparated" />
-        {{ unseparated ? 'No Separator': 'Allow Separator' }}
+        <Switch v-model="rounding" />
+        {{ rounding ? 'Integer': 'Float' }}
       </div>
     </CardBody>
     <CardFooter>
@@ -54,7 +49,7 @@ generate()
 
 <style scoped>
 section {
-  width: 350px;
+  width: 225px;
 }
 
 main {

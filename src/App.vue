@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import Randoms from './views/Randoms.vue';
+import RandomsView from './views/RandomsView.vue'
 </script>
 
 <template>
-  <Randoms />
+  <RandomsView />
 </template>
 
 <style scoped>

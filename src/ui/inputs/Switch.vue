@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { useValue } from '@/components/hook/useValue'
 
 const props = withDefaults(defineProps<{
   modelValue: boolean
@@ -11,10 +11,7 @@ const emit = defineEmits<{
   (e: 'update:modelValue', value: boolean): void
 }>()
 
-const value = ref(props.modelValue)
-
-watch(() => props.modelValue, newval => (value.value = newval))
-watch(value, newval => emit('update:modelValue', newval))
+const value = useValue(props, emit)
 </script>
 
 <template>
