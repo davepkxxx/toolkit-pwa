@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import RandIp from '@/components/rand/RandIp.vue'
 import RandNum from '@/components/rand/RandNum.vue'
+import RandPwd from '@/components/rand/RandPwd.vue';
 import RandUuid from '@/components/rand/RandUuid.vue'
 </script>
 
@@ -8,6 +9,7 @@ import RandUuid from '@/components/rand/RandUuid.vue'
   <div class="ctor">
     <RandIp />
     <RandNum />
+    <RandPwd />
     <RandUuid />
   </div>
 </template>

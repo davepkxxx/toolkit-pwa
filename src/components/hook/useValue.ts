@@ -1,7 +1,7 @@
-import { ref, watch } from 'vue'
+import { shallowRef, watch } from 'vue'
 
-export function useValue(props: { modelValue: any }, emit: (e: 'update:modelValue', value: any) => void) {
-  const value = ref(props.modelValue)
+export function useValue<T>(props: { modelValue: T }, emit: (e: 'update:modelValue', value: T) => void) {
+  const value = shallowRef(props.modelValue)
   watch(() => props.modelValue, newval => (value.value = newval))
   watch(value, newval => emit('update:modelValue', newval))
   return value

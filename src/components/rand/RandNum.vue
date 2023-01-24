@@ -34,8 +34,7 @@ generate()
     <CardHeader>Random Number</CardHeader>
     <CardBody>
       <div>{{ text }}</div>
-      <div>Magnification:</div>
-      <div><Input type="number" v-model.number="rate" /></div>
+      <div>Rate:<Input type="number" v-model.number="rate" /></div>
       <div>
         <Switch v-model="rounding" />
         {{ rounding ? 'Integer': 'Float' }}
@@ -49,7 +48,7 @@ generate()
 
 <style scoped>
 section {
-  width: 225px;
+  width: 200px;
 }
 
 main {
@@ -60,5 +59,10 @@ main {
 
 main > * + * {
   margin-top: 10px;
+}
+
+input {
+  margin-left: 5px;
+  width: 120px;
 }
 </style>
