@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useValue } from '@/components/hook/useValue';
+import { useValue } from '@/hook/useValue';
 import Checkbox from './Checkbox.vue';
 
 export interface TextValueItem<T> {
