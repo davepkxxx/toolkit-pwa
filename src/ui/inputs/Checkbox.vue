@@ -15,19 +15,20 @@ const value = useValue(props, emit)
 </script>
 
 <template>
-  <label>
+  <span class="checkbox-root">
     <input type="checkbox" v-model="value" />
-    <span />
-  </label>
+    <svg focusable="false" viewBox="0 0 24 24" aria-hidden="true">
+      <path v-if="value" d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+      <path v-else d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z" />
+    </svg>
+  </span>
 </template>
 
 <style scoped>
-label {
-  display: inline-block;
+.checkbox-root {
+  display: inline-flex;
   position: relative;
-  border: 2px solid #343434;
-  font-size: 20px;
-  user-select: none;
+  padding: 9px;
   cursor: pointer;
 }
 
@@ -35,31 +36,17 @@ input {
   display: none;
 }
 
-span {
-  display: block;
-  position: relative;
-  top: 0;
-  left: 0;
-  height: 1.3em;
-  width: 1.3em;
-  background-color: #ccc;
-  transition: all 0.3s;
-  border-radius: 5px;
+svg {
+  fill: currentColor;
+  width: 1em;
+  height: 1em;
+  font-size: 1.5rem;
+  transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  flex-shrink: 0;
+  user-select: none;
 }
 
-span:after {
-  content: "";
-  position: absolute;
-  display: none;
-}
-
-input:checked + span {
-  background-color: #47da99;
-  animation: pop 0.5s;
-  animation-direction: alternate;
-}
-
-input:checked ~ .checkmark:after {
-  display: block;
+input:checked + svg {
+  color: #90caf9;
 }
 </style>

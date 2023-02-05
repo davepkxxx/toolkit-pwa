@@ -6,6 +6,7 @@
 
 <style scoped>
 main {
-  padding: 20px;
+  padding: 16px;
+  color: var(--color-text);
 }
 </style>

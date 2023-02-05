@@ -2042,6 +2042,38 @@ function invokeDirectiveHook(vnode, prevVNode, instance, name) {
   }
 }
 const NULL_DYNAMIC_COMPONENT = Symbol();
+function renderList(source, renderItem, cache, index) {
+  let ret;
+  const cached = cache && cache[index];
+  if (isArray$1(source) || isString(source)) {
+    ret = new Array(source.length);
+    for (let i = 0, l = source.length; i < l; i++) {
+      ret[i] = renderItem(source[i], i, void 0, cached && cached[i]);
+    }
+  } else if (typeof source === "number") {
+    ret = new Array(source);
+    for (let i = 0; i < source; i++) {
+      ret[i] = renderItem(i + 1, i, void 0, cached && cached[i]);
+    }
+  } else if (isObject(source)) {
+    if (source[Symbol.iterator]) {
+      ret = Array.from(source, (item, i) => renderItem(item, i, void 0, cached && cached[i]));
+    } else {
+      const keys = Object.keys(source);
+      ret = new Array(keys.length);
+      for (let i = 0, l = keys.length; i < l; i++) {
+        const key = keys[i];
+        ret[i] = renderItem(source[key], key, i, cached && cached[i]);
+      }
+    }
+  } else {
+    ret = [];
+  }
+  if (cache) {
+    cache[index] = ret;
+  }
+  return ret;
+}
 function renderSlot(slots, name, props = {}, fallback, noSlotted) {
   if (currentRenderingInstance.isCE || currentRenderingInstance.parent && isAsyncWrapper(currentRenderingInstance.parent) && currentRenderingInstance.parent.isCE) {
     if (name !== "default")
@@ -4174,6 +4206,9 @@ function cloneVNode(vnode, extraProps, mergeRef = false) {
 function createTextVNode(text = " ", flag = 0) {
   return createVNode(Text, null, text, flag);
 }
+function createCommentVNode(text = "", asBlock = false) {
+  return asBlock ? (openBlock(), createBlock(Comment, null, text)) : createVNode(Comment, null, text);
+}
 function normalizeVNode(child) {
   if (child == null || typeof child === "boolean") {
     return createVNode(Comment);
@@ -5146,7 +5181,7 @@ function createPinia() {
   });
   return pinia;
 }
-const Button_vue_vue_type_style_index_0_scoped_a5f357a5_lang = "";
+const Button_vue_vue_type_style_index_0_scoped_a374fb6c_lang = "";
 const _export_sfc = (sfc, props) => {
   const target = sfc.__vccOpts || sfc;
   for (const [key, val] of props) {
@@ -5154,47 +5189,107 @@ const _export_sfc = (sfc, props) => {
   }
   return target;
 };
-const _sfc_main$k = {};
-const _hoisted_1$c = { type: "button" };
+const _sfc_main$o = {};
+const _hoisted_1$d = { type: "button" };
 function _sfc_render$b(_ctx, _cache) {
-  return openBlock(), createElementBlock("button", _hoisted_1$c, [
+  return openBlock(), createElementBlock("button", _hoisted_1$d, [
     renderSlot(_ctx.$slots, "default", {}, void 0, true)
   ]);
 }
-const Button = /* @__PURE__ */ _export_sfc(_sfc_main$k, [["render", _sfc_render$b], ["__scopeId", "data-v-a5f357a5"]]);
-const Card_vue_vue_type_style_index_0_scoped_c9a4a18f_lang = "";
-const _sfc_main$j = {};
+const Button = /* @__PURE__ */ _export_sfc(_sfc_main$o, [["render", _sfc_render$b], ["__scopeId", "data-v-a374fb6c"]]);
+const Card_vue_vue_type_style_index_0_scoped_ba2782fb_lang = "";
+const _sfc_main$n = {};
 function _sfc_render$a(_ctx, _cache) {
   return openBlock(), createElementBlock("section", null, [
     renderSlot(_ctx.$slots, "default", {}, void 0, true)
   ]);
 }
-const Card = /* @__PURE__ */ _export_sfc(_sfc_main$j, [["render", _sfc_render$a], ["__scopeId", "data-v-c9a4a18f"]]);
-const CardBody_vue_vue_type_style_index_0_scoped_573c21c5_lang = "";
-const _sfc_main$i = {};
+const Card = /* @__PURE__ */ _export_sfc(_sfc_main$n, [["render", _sfc_render$a], ["__scopeId", "data-v-ba2782fb"]]);
+const CardBody_vue_vue_type_style_index_0_scoped_93fc5b2a_lang = "";
+const _sfc_main$m = {};
 function _sfc_render$9(_ctx, _cache) {
   return openBlock(), createElementBlock("main", null, [
     renderSlot(_ctx.$slots, "default", {}, void 0, true)
   ]);
 }
-const CardBody = /* @__PURE__ */ _export_sfc(_sfc_main$i, [["render", _sfc_render$9], ["__scopeId", "data-v-573c21c5"]]);
-const CardFooter_vue_vue_type_style_index_0_scoped_95d644c6_lang = "";
-const _sfc_main$h = {};
+const CardBody = /* @__PURE__ */ _export_sfc(_sfc_main$m, [["render", _sfc_render$9], ["__scopeId", "data-v-93fc5b2a"]]);
+const CardActions_vue_vue_type_style_index_0_scoped_8675092f_lang = "";
+const _sfc_main$l = {};
 function _sfc_render$8(_ctx, _cache) {
   return openBlock(), createElementBlock("footer", null, [
     renderSlot(_ctx.$slots, "default", {}, void 0, true)
   ]);
 }
-const CardFooter = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["render", _sfc_render$8], ["__scopeId", "data-v-95d644c6"]]);
-const CardHeader_vue_vue_type_style_index_0_scoped_a88971b8_lang = "";
-const _sfc_main$g = {};
+const CardActions = /* @__PURE__ */ _export_sfc(_sfc_main$l, [["render", _sfc_render$8], ["__scopeId", "data-v-8675092f"]]);
+const CardHeader_vue_vue_type_style_index_0_scoped_cceee96c_lang = "";
+const _sfc_main$k = {};
 function _sfc_render$7(_ctx, _cache) {
   return openBlock(), createElementBlock("header", null, [
     renderSlot(_ctx.$slots, "default", {}, void 0, true)
   ]);
 }
-const CardHeader = /* @__PURE__ */ _export_sfc(_sfc_main$g, [["render", _sfc_render$7], ["__scopeId", "data-v-a88971b8"]]);
-const _sfc_main$f = /* @__PURE__ */ defineComponent({
+const CardHeader = /* @__PURE__ */ _export_sfc(_sfc_main$k, [["render", _sfc_render$7], ["__scopeId", "data-v-cceee96c"]]);
+const _sfc_main$j = /* @__PURE__ */ defineComponent({
+  __name: "FormItem",
+  props: {
+    fullWidth: { type: Boolean }
+  },
+  setup(__props) {
+    return (_ctx, _cache) => {
+      return openBlock(), createElementBlock("div", {
+        class: normalizeClass({ "form-item-full-width": __props.fullWidth })
+      }, [
+        renderSlot(_ctx.$slots, "default", {}, void 0, true)
+      ], 2);
+    };
+  }
+});
+const FormItem_vue_vue_type_style_index_0_scoped_500bd542_lang = "";
+const FormItem_vue_vue_type_style_index_1_lang = "";
+const FormItem = /* @__PURE__ */ _export_sfc(_sfc_main$j, [["__scopeId", "data-v-500bd542"]]);
+function useValue(props, emit) {
+  const value = shallowRef(props.modelValue);
+  watch(() => props.modelValue, (newval) => value.value = newval);
+  watch(value, (newval) => emit("update:modelValue", newval));
+  return value;
+}
+const _hoisted_1$c = { class: "input-root" };
+const _hoisted_2$a = { key: 0 };
+const _hoisted_3$8 = ["type"];
+const _hoisted_4$2 = { key: 1 };
+const _hoisted_5$1 = { key: 0 };
+const _sfc_main$i = /* @__PURE__ */ defineComponent({
+  __name: "Input",
+  props: {
+    modelValue: { default: "" },
+    type: { default: "text" },
+    readonly: { type: Boolean, default: false },
+    label: { default: "" },
+    border: { type: Boolean, default: true }
+  },
+  emits: ["update:modelValue"],
+  setup(__props, { emit }) {
+    const props = __props;
+    const value = useValue(props, emit);
+    return (_ctx, _cache) => {
+      return openBlock(), createElementBlock("span", _hoisted_1$c, [
+        __props.label ? (openBlock(), createElementBlock("label", _hoisted_2$a, toDisplayString(__props.label), 1)) : createCommentVNode("", true),
+        withDirectives(createBaseVNode("input", {
+          type: __props.type,
+          "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => isRef(value) ? value.value = $event : null)
+        }, null, 8, _hoisted_3$8), [
+          [vModelDynamic, unref(value)]
+        ]),
+        __props.border ? (openBlock(), createElementBlock("fieldset", _hoisted_4$2, [
+          __props.label ? (openBlock(), createElementBlock("legend", _hoisted_5$1, toDisplayString(__props.label), 1)) : createCommentVNode("", true)
+        ])) : createCommentVNode("", true)
+      ]);
+    };
+  }
+});
+const Input_vue_vue_type_style_index_0_scoped_37cb5299_lang = "";
+const Input = /* @__PURE__ */ _export_sfc(_sfc_main$i, [["__scopeId", "data-v-37cb5299"]]);
+const _sfc_main$h = /* @__PURE__ */ defineComponent({
   __name: "RandIp",
   setup(__props) {
     const value = ref("");
@@ -5216,15 +5311,24 @@ const _sfc_main$f = /* @__PURE__ */ defineComponent({
           }),
           createVNode(CardBody, null, {
             default: withCtx(() => [
-              createBaseVNode("div", null, toDisplayString(value.value), 1)
+              createVNode(FormItem, { "full-width": "" }, {
+                default: withCtx(() => [
+                  createVNode(Input, {
+                    "model-value": value.value,
+                    readonly: "",
+                    border: false
+                  }, null, 8, ["model-value"])
+                ]),
+                _: 1
+              })
             ]),
             _: 1
           }),
-          createVNode(CardFooter, null, {
+          createVNode(CardActions, null, {
             default: withCtx(() => [
               createVNode(Button, { onClick: generate }, {
                 default: withCtx(() => [
-                  createTextVNode("Generate")
+                  createTextVNode("GENERATE")
                 ]),
                 _: 1
               })
@@ -5237,40 +5341,14 @@ const _sfc_main$f = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const RandIp_vue_vue_type_style_index_0_scoped_b3806155_lang = "";
-const RandIp = /* @__PURE__ */ _export_sfc(_sfc_main$f, [["__scopeId", "data-v-b3806155"]]);
-function useValue(props, emit) {
-  const value = ref(props.modelValue);
-  watch(() => props.modelValue, (newval) => value.value = newval);
-  watch(value, (newval) => emit("update:modelValue", newval));
-  return value;
-}
-const _hoisted_1$b = ["type"];
-const _sfc_main$e = /* @__PURE__ */ defineComponent({
-  __name: "Input",
-  props: {
-    modelValue: { default: "" },
-    type: { default: "text" }
-  },
-  emits: ["update:modelValue"],
-  setup(__props, { emit }) {
-    const props = __props;
-    const value = useValue(props, emit);
-    return (_ctx, _cache) => {
-      return withDirectives((openBlock(), createElementBlock("input", {
-        type: __props.type,
-        "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => isRef(value) ? value.value = $event : null)
-      }, null, 8, _hoisted_1$b)), [
-        [vModelDynamic, unref(value)]
-      ]);
-    };
-  }
-});
-const Input_vue_vue_type_style_index_0_scoped_094dabe9_lang = "";
-const Input = /* @__PURE__ */ _export_sfc(_sfc_main$e, [["__scopeId", "data-v-094dabe9"]]);
-const _withScopeId$1 = (n) => (pushScopeId("data-v-d2fa59ac"), n = n(), popScopeId(), n);
-const _hoisted_1$a = /* @__PURE__ */ _withScopeId$1(() => /* @__PURE__ */ createBaseVNode("span", null, null, -1));
-const _sfc_main$d = /* @__PURE__ */ defineComponent({
+const RandIp_vue_vue_type_style_index_0_scoped_1a982493_lang = "";
+const RandIp = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["__scopeId", "data-v-1a982493"]]);
+const _withScopeId = (n) => (pushScopeId("data-v-41961c50"), n = n(), popScopeId(), n);
+const _hoisted_1$b = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ createBaseVNode("span", { class: "switch-trigger" }, [
+  /* @__PURE__ */ createBaseVNode("i")
+], -1));
+const _hoisted_2$9 = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ createBaseVNode("span", { class: "switch-track" }, null, -1));
+const _sfc_main$g = /* @__PURE__ */ defineComponent({
   __name: "Switch",
   props: {
     modelValue: { type: Boolean, default: false }
@@ -5280,23 +5358,25 @@ const _sfc_main$d = /* @__PURE__ */ defineComponent({
     const props = __props;
     const value = useValue(props, emit);
     return (_ctx, _cache) => {
-      return openBlock(), createElementBlock("label", null, [
+      return openBlock(), createElementBlock("span", {
+        class: "switch-root",
+        onClick: _cache[1] || (_cache[1] = ($event) => value.value = !unref(value))
+      }, [
         withDirectives(createBaseVNode("input", {
           type: "checkbox",
           "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => isRef(value) ? value.value = $event : null)
         }, null, 512), [
           [vModelCheckbox, unref(value)]
         ]),
-        _hoisted_1$a
+        _hoisted_1$b,
+        _hoisted_2$9
       ]);
     };
   }
 });
-const Switch_vue_vue_type_style_index_0_scoped_d2fa59ac_lang = "";
-const Switch = /* @__PURE__ */ _export_sfc(_sfc_main$d, [["__scopeId", "data-v-d2fa59ac"]]);
-const _withScopeId = (n) => (pushScopeId("data-v-9d70051a"), n = n(), popScopeId(), n);
-const _hoisted_1$9 = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ createBaseVNode("div", null, "Magnification:", -1));
-const _sfc_main$c = /* @__PURE__ */ defineComponent({
+const Switch_vue_vue_type_style_index_0_scoped_41961c50_lang = "";
+const Switch = /* @__PURE__ */ _export_sfc(_sfc_main$g, [["__scopeId", "data-v-41961c50"]]);
+const _sfc_main$f = /* @__PURE__ */ defineComponent({
   __name: "RandNum",
   setup(__props) {
     const value = ref(Math.random());
@@ -5324,31 +5404,46 @@ const _sfc_main$c = /* @__PURE__ */ defineComponent({
           }),
           createVNode(CardBody, null, {
             default: withCtx(() => [
-              createBaseVNode("div", null, toDisplayString(unref(text)), 1),
-              _hoisted_1$9,
-              createBaseVNode("div", null, [
-                createVNode(Input, {
-                  type: "number",
-                  modelValue: rate.value,
-                  "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => rate.value = $event),
-                  modelModifiers: { number: true }
-                }, null, 8, ["modelValue"])
-              ]),
-              createBaseVNode("div", null, [
-                createVNode(Switch, {
-                  modelValue: rounding.value,
-                  "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => rounding.value = $event)
-                }, null, 8, ["modelValue"]),
-                createTextVNode(" " + toDisplayString(rounding.value ? "Integer" : "Float"), 1)
-              ])
+              createVNode(FormItem, { "full-width": "" }, {
+                default: withCtx(() => [
+                  createVNode(Input, {
+                    "model-value": unref(text),
+                    readonly: "",
+                    border: false
+                  }, null, 8, ["model-value"])
+                ]),
+                _: 1
+              }),
+              createVNode(FormItem, { "full-width": "" }, {
+                default: withCtx(() => [
+                  createVNode(Input, {
+                    type: "number",
+                    label: "Rate",
+                    modelValue: rate.value,
+                    "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => rate.value = $event),
+                    modelModifiers: { number: true }
+                  }, null, 8, ["modelValue"])
+                ]),
+                _: 1
+              }),
+              createVNode(FormItem, { "full-width": "" }, {
+                default: withCtx(() => [
+                  createVNode(Switch, {
+                    modelValue: rounding.value,
+                    "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => rounding.value = $event)
+                  }, null, 8, ["modelValue"]),
+                  createTextVNode(" " + toDisplayString(rounding.value ? "Integer" : "Float"), 1)
+                ]),
+                _: 1
+              })
             ]),
             _: 1
           }),
-          createVNode(CardFooter, null, {
+          createVNode(CardActions, null, {
             default: withCtx(() => [
               createVNode(Button, { onClick: generate }, {
                 default: withCtx(() => [
-                  createTextVNode("Generate")
+                  createTextVNode("GENERATE")
                 ]),
                 _: 1
               })
@@ -5361,8 +5456,172 @@ const _sfc_main$c = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const RandNum_vue_vue_type_style_index_0_scoped_9d70051a_lang = "";
-const RandNum = /* @__PURE__ */ _export_sfc(_sfc_main$c, [["__scopeId", "data-v-9d70051a"]]);
+const RandNum_vue_vue_type_style_index_0_scoped_3b99d147_lang = "";
+const RandNum = /* @__PURE__ */ _export_sfc(_sfc_main$f, [["__scopeId", "data-v-3b99d147"]]);
+const _hoisted_1$a = { class: "checkbox-root" };
+const _hoisted_2$8 = {
+  focusable: "false",
+  viewBox: "0 0 24 24",
+  "aria-hidden": "true"
+};
+const _hoisted_3$7 = {
+  key: 0,
+  d: "M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
+};
+const _hoisted_4$1 = {
+  key: 1,
+  d: "M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
+};
+const _sfc_main$e = /* @__PURE__ */ defineComponent({
+  __name: "Checkbox",
+  props: {
+    modelValue: { type: Boolean, default: false }
+  },
+  emits: ["update:modelValue"],
+  setup(__props, { emit }) {
+    const props = __props;
+    const value = useValue(props, emit);
+    return (_ctx, _cache) => {
+      return openBlock(), createElementBlock("span", _hoisted_1$a, [
+        withDirectives(createBaseVNode("input", {
+          type: "checkbox",
+          "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => isRef(value) ? value.value = $event : null)
+        }, null, 512), [
+          [vModelCheckbox, unref(value)]
+        ]),
+        (openBlock(), createElementBlock("svg", _hoisted_2$8, [
+          unref(value) ? (openBlock(), createElementBlock("path", _hoisted_3$7)) : (openBlock(), createElementBlock("path", _hoisted_4$1))
+        ]))
+      ]);
+    };
+  }
+});
+const Checkbox_vue_vue_type_style_index_0_scoped_6e416b08_lang = "";
+const Checkbox = /* @__PURE__ */ _export_sfc(_sfc_main$e, [["__scopeId", "data-v-6e416b08"]]);
+const _hoisted_1$9 = { class: "checkbox-group-root" };
+const _sfc_main$d = /* @__PURE__ */ defineComponent({
+  __name: "CheckboxGroup",
+  props: {
+    modelValue: { default: () => [] },
+    items: { default: () => [] }
+  },
+  emits: ["update:modelValue"],
+  setup(__props, { emit }) {
+    const props = __props;
+    const value = useValue(props, emit);
+    function includes(item) {
+      return value.value.some((e) => e === item.value);
+    }
+    function onUpdate(checked, item) {
+      value.value = checked ? value.value.concat(item.value) : value.value.reduce((res, e) => e === item.value ? res : res.concat(e), []);
+    }
+    return (_ctx, _cache) => {
+      return openBlock(), createElementBlock("div", _hoisted_1$9, [
+        (openBlock(true), createElementBlock(Fragment, null, renderList(__props.items, (item) => {
+          return openBlock(), createElementBlock(Fragment, null, [
+            createVNode(Checkbox, {
+              "model-value": includes(item),
+              "onUpdate:modelValue": (newval) => onUpdate(newval, item)
+            }, null, 8, ["model-value", "onUpdate:modelValue"]),
+            createBaseVNode("span", null, toDisplayString(item.text), 1)
+          ], 64);
+        }), 256))
+      ]);
+    };
+  }
+});
+const CheckboxGroup_vue_vue_type_style_index_0_scoped_172350c6_lang = "";
+const CheckboxGroup = /* @__PURE__ */ _export_sfc(_sfc_main$d, [["__scopeId", "data-v-172350c6"]]);
+const _sfc_main$c = /* @__PURE__ */ defineComponent({
+  __name: "RandPwd",
+  setup(__props) {
+    function concatChars(start, end, chars = "") {
+      return start > end ? chars : concatChars(start + 1, end, chars + String.fromCharCode(start));
+    }
+    const allowItems = [
+      { value: "losercase", text: "a-z", chars: concatChars(97, 122) },
+      { value: "uppercase", text: "A-Z", chars: concatChars(65, 90) },
+      { value: "numbers", text: "0-9", chars: concatChars(48, 57) },
+      { value: "symbols", text: "symbols", chars: "!#$%&*@^" }
+    ];
+    const value = ref("");
+    const length = ref(8);
+    const allows = ref(["losercase", "uppercase", "numbers", "symbols"]);
+    function generate() {
+      let chars = allowItems.reduce((res, item) => allows.value.reduce((res2, allow) => item.value === allow ? res2 + item.chars : res2, res), "");
+      value.value = "";
+      for (let i = 0; i < length.value; i++) {
+        value.value += chars.charAt(Math.floor(chars.length * Math.random()));
+      }
+    }
+    watch(length, generate);
+    watch(allows, generate);
+    generate();
+    return (_ctx, _cache) => {
+      return openBlock(), createBlock(Card, null, {
+        default: withCtx(() => [
+          createVNode(CardHeader, null, {
+            default: withCtx(() => [
+              createTextVNode("Random Password")
+            ]),
+            _: 1
+          }),
+          createVNode(CardBody, null, {
+            default: withCtx(() => [
+              createVNode(FormItem, { "full-width": "" }, {
+                default: withCtx(() => [
+                  createVNode(Input, {
+                    "model-value": value.value,
+                    readonly: "",
+                    border: false
+                  }, null, 8, ["model-value"])
+                ]),
+                _: 1
+              }),
+              createVNode(FormItem, { "full-width": "" }, {
+                default: withCtx(() => [
+                  createVNode(Input, {
+                    type: "number",
+                    label: "Length",
+                    modelValue: length.value,
+                    "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => length.value = $event),
+                    modelModifiers: { number: true }
+                  }, null, 8, ["modelValue"])
+                ]),
+                _: 1
+              }),
+              createVNode(FormItem, { "full-width": "" }, {
+                default: withCtx(() => [
+                  createVNode(CheckboxGroup, {
+                    modelValue: allows.value,
+                    "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => allows.value = $event),
+                    items: allowItems
+                  }, null, 8, ["modelValue"])
+                ]),
+                _: 1
+              })
+            ]),
+            _: 1
+          }),
+          createVNode(CardActions, null, {
+            default: withCtx(() => [
+              createVNode(Button, { onClick: generate }, {
+                default: withCtx(() => [
+                  createTextVNode("GENERATE")
+                ]),
+                _: 1
+              })
+            ]),
+            _: 1
+          })
+        ]),
+        _: 1
+      });
+    };
+  }
+});
+const RandPwd_vue_vue_type_style_index_0_scoped_21e96391_lang = "";
+const RandPwd = /* @__PURE__ */ _export_sfc(_sfc_main$c, [["__scopeId", "data-v-21e96391"]]);
 const _sfc_main$b = /* @__PURE__ */ defineComponent({
   __name: "RandUuid",
   setup(__props) {
@@ -5394,29 +5653,44 @@ const _sfc_main$b = /* @__PURE__ */ defineComponent({
           }),
           createVNode(CardBody, null, {
             default: withCtx(() => [
-              createBaseVNode("div", null, toDisplayString(unref(text)), 1),
-              createBaseVNode("div", null, [
-                createVNode(Switch, {
-                  modelValue: upper.value,
-                  "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => upper.value = $event)
-                }, null, 8, ["modelValue"]),
-                createTextVNode(" " + toDisplayString(upper.value ? "Upper Case" : "Lower Case"), 1)
-              ]),
-              createBaseVNode("div", null, [
-                createVNode(Switch, {
-                  modelValue: unseparated.value,
-                  "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => unseparated.value = $event)
-                }, null, 8, ["modelValue"]),
-                createTextVNode(" " + toDisplayString(unseparated.value ? "No Separator" : "Allow Separator"), 1)
-              ])
+              createVNode(FormItem, { "full-width": "" }, {
+                default: withCtx(() => [
+                  createVNode(Input, {
+                    "model-value": unref(text),
+                    readonly: "",
+                    border: false
+                  }, null, 8, ["model-value"])
+                ]),
+                _: 1
+              }),
+              createVNode(FormItem, { "full-width": "" }, {
+                default: withCtx(() => [
+                  createVNode(Switch, {
+                    modelValue: upper.value,
+                    "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => upper.value = $event)
+                  }, null, 8, ["modelValue"]),
+                  createTextVNode(" " + toDisplayString(upper.value ? "Upper Case" : "Lower Case"), 1)
+                ]),
+                _: 1
+              }),
+              createVNode(FormItem, { "full-width": "" }, {
+                default: withCtx(() => [
+                  createVNode(Switch, {
+                    modelValue: unseparated.value,
+                    "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => unseparated.value = $event)
+                  }, null, 8, ["modelValue"]),
+                  createTextVNode(" " + toDisplayString(unseparated.value ? "No Separator" : "Allow Separator"), 1)
+                ]),
+                _: 1
+              })
             ]),
             _: 1
           }),
-          createVNode(CardFooter, null, {
+          createVNode(CardActions, null, {
             default: withCtx(() => [
               createVNode(Button, { onClick: generate }, {
                 default: withCtx(() => [
-                  createTextVNode("Generate")
+                  createTextVNode("GENERATE")
                 ]),
                 _: 1
               })
@@ -5429,8 +5703,8 @@ const _sfc_main$b = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const RandUuid_vue_vue_type_style_index_0_scoped_6bd471b1_lang = "";
-const RandUuid = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["__scopeId", "data-v-6bd471b1"]]);
+const RandUuid_vue_vue_type_style_index_0_scoped_68b7ac33_lang = "";
+const RandUuid = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["__scopeId", "data-v-68b7ac33"]]);
 const _hoisted_1$8 = { class: "ctor" };
 const _sfc_main$a = /* @__PURE__ */ defineComponent({
   __name: "RandomsView",
@@ -5439,13 +5713,14 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
       return openBlock(), createElementBlock("div", _hoisted_1$8, [
         createVNode(RandIp),
         createVNode(RandNum),
+        createVNode(RandPwd),
         createVNode(RandUuid)
       ]);
     };
   }
 });
-const RandomsView_vue_vue_type_style_index_0_scoped_776972e0_lang = "";
-const RandomsView = /* @__PURE__ */ _export_sfc(_sfc_main$a, [["__scopeId", "data-v-776972e0"]]);
+const RandomsView_vue_vue_type_style_index_0_scoped_9ae57c28_lang = "";
+const RandomsView = /* @__PURE__ */ _export_sfc(_sfc_main$a, [["__scopeId", "data-v-9ae57c28"]]);
 const _sfc_main$9 = /* @__PURE__ */ defineComponent({
   __name: "App",
   setup(__props) {

@@ -6,8 +6,8 @@
 
 <style scoped>
 header {
-  padding: 20px;
-  border-bottom: 1px solid var(--color-background);
+  padding: 16px;
   font-weight: bold;
+  color: var(--color-heading);
 }
 </style>

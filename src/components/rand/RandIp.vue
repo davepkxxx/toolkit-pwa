@@ -2,8 +2,10 @@
 import Button from '@/ui/btns/Button.vue'
 import Card from '@/ui/cards/Card.vue'
 import CardBody from '@/ui/cards/CardBody.vue'
-import CardFooter from '@/ui/cards/CardFooter.vue'
+import CardActions from '@/ui/cards/CardActions.vue'
 import CardHeader from '@/ui/cards/CardHeader.vue'
+import FormItem from '@/ui/form/FormItem.vue'
+import Input from '@/ui/inputs/Input.vue'
 import { ref } from 'vue'
 
 const value = ref('')
@@ -23,16 +25,18 @@ generate()
   <Card>
     <CardHeader>Random IP</CardHeader>
     <CardBody>
-      <div>{{ value }}</div>
+      <FormItem full-width>
+        <Input :model-value="value" readonly :border="false" />
+      </FormItem>
     </CardBody>
-    <CardFooter>
-      <Button @click="generate">Generate</Button>
-    </CardFooter>
+    <CardActions>
+      <Button @click="generate">GENERATE</Button>
+    </CardActions>
   </Card>
 </template>
 
 <style scoped>
 section {
-  width: 170px;
+  width: 130px;
 }
 </style>

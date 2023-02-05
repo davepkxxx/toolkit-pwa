@@ -2,8 +2,9 @@
 import Button from '@/ui/btns/Button.vue'
 import Card from '@/ui/cards/Card.vue'
 import CardBody from '@/ui/cards/CardBody.vue'
-import CardFooter from '@/ui/cards/CardFooter.vue'
+import CardActions from '@/ui/cards/CardActions.vue'
 import CardHeader from '@/ui/cards/CardHeader.vue'
+import FormItem from '@/ui/form/FormItem.vue'
 import CheckboxGroup from '@/ui/inputs/CheckboxGroup.vue'
 import Input from '@/ui/inputs/Input.vue'
 import { ref, watch } from 'vue'
@@ -20,13 +21,13 @@ const allowItems = [
 ]
 
 const value = ref('')
-const length = ref(8);
+const length = ref(8)
 const allows = ref(['losercase', 'uppercase', 'numbers', 'symbols'])
 
 function generate() {
   let chars = allowItems.reduce((res, item) => allows.value.reduce((res, allow) => (
     item.value === allow ? res + item.chars : res
-  ), res), '');
+  ), res), '')
 
   value.value = ''
   for (let i = 0; i < length.value; i++) {
@@ -44,21 +45,25 @@ generate()
   <Card>
     <CardHeader>Random Password</CardHeader>
     <CardBody>
-      <div>{{ value }}</div>
-      <div>Length: <Input type="number" v-model.number="length" /></div>
-      <div>
+      <FormItem full-width>
+        <Input :model-value="value" readonly :border="false" />
+      </FormItem>
+      <FormItem full-width>
+        <Input type="number" label="Length" v-model.number="length" />
+      </FormItem>
+      <FormItem full-width>
         <CheckboxGroup v-model="allows" :items="allowItems" />
-      </div>
+      </FormItem>
     </CardBody>
-    <CardFooter>
-      <Button @click="generate">Generate</Button>
-    </CardFooter>
+    <CardActions>
+      <Button @click="generate">GENERATE</Button>
+    </CardActions>
   </Card>
 </template>
 
 <style scoped>
 section {
-  width: 225px;
+  width: 190px;
 }
 
 main {

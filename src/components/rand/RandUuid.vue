@@ -2,8 +2,10 @@
 import Button from '@/ui/btns/Button.vue'
 import Card from '@/ui/cards/Card.vue'
 import CardBody from '@/ui/cards/CardBody.vue'
-import CardFooter from '@/ui/cards/CardFooter.vue'
+import CardActions from '@/ui/cards/CardActions.vue'
 import CardHeader from '@/ui/cards/CardHeader.vue'
+import FormItem from '@/ui/form/FormItem.vue'
+import Input from '@/ui/inputs/Input.vue'
 import Switch from '@/ui/inputs/Switch.vue'
 import { computed, ref } from 'vue'
 
@@ -36,25 +38,27 @@ generate()
   <Card>
     <CardHeader>Random UUID</CardHeader>
     <CardBody>
-      <div>{{ text }}</div>
-      <div>
+      <FormItem full-width>
+        <Input :model-value="text" readonly :border="false" />
+      </FormItem>
+      <FormItem full-width>
         <Switch v-model="upper" />
         {{ upper ? 'Upper Case': 'Lower Case' }}
-      </div>
-      <div>
+      </FormItem>
+      <FormItem full-width>
         <Switch v-model="unseparated" />
         {{ unseparated ? 'No Separator': 'Allow Separator' }}
-      </div>
+      </FormItem>
     </CardBody>
-    <CardFooter>
-      <Button @click="generate">Generate</Button>
-    </CardFooter>
+    <CardActions>
+      <Button @click="generate">GENERATE</Button>
+    </CardActions>
   </Card>
 </template>
 
 <style scoped>
 section {
-  width: 350px;
+  width: 320px;
 }
 
 main {

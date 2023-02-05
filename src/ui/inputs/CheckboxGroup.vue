@@ -33,26 +33,18 @@ function onUpdate<T>(checked: boolean, item: TextValueItem<T>) {
 </script>
 
 <template>
-  <div class="ctor">
-    <div v-for="item in items" class="item">
+  <div class="checkbox-group-root">
+    <template v-for="item in items" class="item">
       <Checkbox :model-value="includes(item)" @update:model-value="newval => onUpdate(newval, item)" />
       <span>{{ item.text }}</span>
-    </div>
+    </template>
   </div>
 </template>
 
 <style scoped>
-.ctor {
+.checkbox-group-root {
   display: inline-flex;
   flex-flow: row wrap;
-}
-
-.item {
-  display: inline-flex;
-  flex-flow: row nowrap;
-}
-
-span {
-  margin: 0 5px;
+  align-items: center;
 }
 </style>

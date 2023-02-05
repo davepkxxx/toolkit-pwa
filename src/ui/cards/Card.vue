@@ -7,6 +7,6 @@
 <style scoped>
 section {
   background: var(--color-background-mute);
-  border-radius: 20px;
+  border-radius: 4px;
 }
 </style>

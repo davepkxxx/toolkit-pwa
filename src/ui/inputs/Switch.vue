@@ -15,20 +15,29 @@ const value = useValue(props, emit)
 </script>
 
 <template>
-  <label>
+  <span class="switch-root" @click="value = !value">
     <input type="checkbox" v-model="value" />
-    <span />
-  </label>
+    <span class="switch-trigger">
+      <i />
+    </span>
+    <span class="switch-track" />
+  </span>
 </template>
 
 <style scoped>
-label {
-  display: inline-block;
-  font-size: 20px;
-  height: 1em;
-  width: 2em;
-  background: #8b8b8b;
-  border-radius: 1em;
+.switch-root {
+  width: 58px;
+  height: 38px;
+  display: inline-flex;
+  padding: 12px;
+  z-index: 0;
+  overflow: hidden;
+  position: relative;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  vertical-align: middle;
+  color: #bdbdbd;
+  z-index: 1;
   cursor: pointer;
 }
 
@@ -36,17 +45,39 @@ input {
   display: none;
 }
 
-span {
-  display: block;
-  height: 1em;
-  width: 1em;
-  border-radius: 1em;
-  background: white;
-  box-shadow: 0 0.1em 0.3em #0000004d;
-  transition: all .3s;
+
+.switch-track {
+  width: 100%;
+  height: 100%;
+  opacity: 0.3;
+  z-index: -1;
+  transition: opacity 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  border-radius: 7px;
+  background-color: #fff;
 }
 
-input:checked + span {
-  transform: translate3d(100%, 0, 0);
+.switch-trigger {
+  top: 0;
+  left: 0;
+  position: absolute;
+  display: block;
+  padding: 9px;
+  flex: 0 0 auto;
+  transition: left 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, transform 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+}
+
+i {
+  display: block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: currentColor;
+  color: #bdbdbd;
+  z-index: 1;
+  transition: left 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,transform 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+}
+
+input:checked + .switch-trigger {
+  transform: translateX(20px);
 }
 </style>
