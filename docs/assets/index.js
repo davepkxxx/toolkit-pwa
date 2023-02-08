@@ -5256,7 +5256,7 @@ function useValue(props, emit) {
 const _hoisted_1$c = { class: "input-root" };
 const _hoisted_2$a = { key: 0 };
 const _hoisted_3$8 = ["type"];
-const _hoisted_4$2 = { key: 1 };
+const _hoisted_4$1 = { key: 1 };
 const _hoisted_5$1 = { key: 0 };
 const _sfc_main$i = /* @__PURE__ */ defineComponent({
   __name: "Input",
@@ -5280,15 +5280,15 @@ const _sfc_main$i = /* @__PURE__ */ defineComponent({
         }, null, 8, _hoisted_3$8), [
           [vModelDynamic, unref(value)]
         ]),
-        __props.border ? (openBlock(), createElementBlock("fieldset", _hoisted_4$2, [
+        __props.border ? (openBlock(), createElementBlock("fieldset", _hoisted_4$1, [
           __props.label ? (openBlock(), createElementBlock("legend", _hoisted_5$1, toDisplayString(__props.label), 1)) : createCommentVNode("", true)
         ])) : createCommentVNode("", true)
       ]);
     };
   }
 });
-const Input_vue_vue_type_style_index_0_scoped_37cb5299_lang = "";
-const Input = /* @__PURE__ */ _export_sfc(_sfc_main$i, [["__scopeId", "data-v-37cb5299"]]);
+const Input_vue_vue_type_style_index_0_scoped_dd91fb08_lang = "";
+const Input = /* @__PURE__ */ _export_sfc(_sfc_main$i, [["__scopeId", "data-v-dd91fb08"]]);
 const _sfc_main$h = /* @__PURE__ */ defineComponent({
   __name: "RandIp",
   setup(__props) {
@@ -5458,17 +5458,16 @@ const _sfc_main$f = /* @__PURE__ */ defineComponent({
 });
 const RandNum_vue_vue_type_style_index_0_scoped_3b99d147_lang = "";
 const RandNum = /* @__PURE__ */ _export_sfc(_sfc_main$f, [["__scopeId", "data-v-3b99d147"]]);
-const _hoisted_1$a = { class: "checkbox-root" };
-const _hoisted_2$8 = {
+const _hoisted_1$a = {
   focusable: "false",
   viewBox: "0 0 24 24",
   "aria-hidden": "true"
 };
-const _hoisted_3$7 = {
+const _hoisted_2$8 = {
   key: 0,
   d: "M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
 };
-const _hoisted_4$1 = {
+const _hoisted_3$7 = {
   key: 1,
   d: "M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
 };
@@ -5482,22 +5481,25 @@ const _sfc_main$e = /* @__PURE__ */ defineComponent({
     const props = __props;
     const value = useValue(props, emit);
     return (_ctx, _cache) => {
-      return openBlock(), createElementBlock("span", _hoisted_1$a, [
+      return openBlock(), createElementBlock("span", {
+        class: "checkbox-root",
+        onClick: _cache[1] || (_cache[1] = ($event) => value.value = !unref(value))
+      }, [
         withDirectives(createBaseVNode("input", {
           type: "checkbox",
           "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => isRef(value) ? value.value = $event : null)
         }, null, 512), [
           [vModelCheckbox, unref(value)]
         ]),
-        (openBlock(), createElementBlock("svg", _hoisted_2$8, [
-          unref(value) ? (openBlock(), createElementBlock("path", _hoisted_3$7)) : (openBlock(), createElementBlock("path", _hoisted_4$1))
+        (openBlock(), createElementBlock("svg", _hoisted_1$a, [
+          unref(value) ? (openBlock(), createElementBlock("path", _hoisted_2$8)) : (openBlock(), createElementBlock("path", _hoisted_3$7))
         ]))
       ]);
     };
   }
 });
-const Checkbox_vue_vue_type_style_index_0_scoped_6e416b08_lang = "";
-const Checkbox = /* @__PURE__ */ _export_sfc(_sfc_main$e, [["__scopeId", "data-v-6e416b08"]]);
+const Checkbox_vue_vue_type_style_index_0_scoped_3bfec581_lang = "";
+const Checkbox = /* @__PURE__ */ _export_sfc(_sfc_main$e, [["__scopeId", "data-v-3bfec581"]]);
 const _hoisted_1$9 = { class: "checkbox-group-root" };
 const _sfc_main$d = /* @__PURE__ */ defineComponent({
   __name: "CheckboxGroup",

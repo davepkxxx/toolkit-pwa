@@ -48,11 +48,11 @@ header[data-v-cceee96c] {
   width: 100%;
 }
 
-.input-root[data-v-37cb5299] {
+.input-root[data-v-dd91fb08] {
   display: inline-flex;
   box-sizing: border-box;
 }
-label[data-v-37cb5299] {
+label[data-v-dd91fb08] {
   top: -5px;
   left: 14px;
   position: absolute;
@@ -60,7 +60,7 @@ label[data-v-37cb5299] {
   line-height: 1;
   z-index: 1;
 }
-input[data-v-37cb5299] {
+input[data-v-dd91fb08] {
   display: block;
   box-sizing: content-box;
   padding: 6px 0 7px;
@@ -70,17 +70,17 @@ input[data-v-37cb5299] {
   background: none;
   color: currentColor;
 }
-input[data-v-37cb5299]:focus {
+input[data-v-dd91fb08]:focus {
   outline: none;
 }
-label + input[data-v-37cb5299] {
+label + input[data-v-dd91fb08] {
   padding: 18.5px 14px;
 }
-input:focus + fieldset[data-v-37cb5299] {
+input:focus + fieldset[data-v-dd91fb08] {
   border-color: #90caf9;
   border-width: 2px;
 }
-fieldset[data-v-37cb5299] {
+fieldset[data-v-dd91fb08] {
   top: -5px;
   left: 0;
   right: 0;
@@ -93,7 +93,7 @@ fieldset[data-v-37cb5299] {
   border-radius: 4px;
   pointer-events: none;
 }
-legend[data-v-37cb5299] {
+legend[data-v-dd91fb08] {
   padding-left: 5px;
   padding-right: 5px;
   font-size: .75em;
@@ -170,16 +170,16 @@ input[data-v-3b99d147] {
   width: 120px;
 }
 
-.checkbox-root[data-v-6e416b08] {
+.checkbox-root[data-v-3bfec581] {
   display: inline-flex;
   position: relative;
   padding: 9px;
   cursor: pointer;
 }
-input[data-v-6e416b08] {
+input[data-v-3bfec581] {
   display: none;
 }
-svg[data-v-6e416b08] {
+svg[data-v-3bfec581] {
   fill: currentColor;
   width: 1em;
   height: 1em;
@@ -188,7 +188,7 @@ svg[data-v-6e416b08] {
   flex-shrink: 0;
   user-select: none;
 }
-input:checked + svg[data-v-6e416b08] {
+input:checked + svg[data-v-3bfec581] {
   color: #90caf9;
 }
 

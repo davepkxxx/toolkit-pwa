@@ -2,11 +2,11 @@
 import { useValue } from '@/hook/useValue'
 
 const props = withDefaults(defineProps<{
-  modelValue: string | number
-  type: string,
-  readonly: boolean,
-  label: string
-  border: boolean
+  modelValue?: string | number
+  type?: string,
+  readonly?: boolean,
+  label?: string
+  border?: boolean
 }>(), {
   modelValue: '',
   type: 'text',
